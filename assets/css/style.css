@@ -15,3 +15,7 @@
 #progress_bar {
     margin: 0.5em;
 }
+
+#headers th {
+  font-size: 1.1em;
+}

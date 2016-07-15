@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MBTA Departures</title>
+    <link rel="stylesheet" href="./assets/css/pure-min.css">
+    <link rel="stylesheet" href="./assets/css/grids-responsive-min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <div class="pure-g container">
+        <div class="pure-u-1">
+            <h1 style="text-align:center">MBTA Trains</h1>
+            
+            <h2>Recent Departures</h2>
+            <table class="pure-table pure-table-striped csvpreview">
+                <thead>
+                    <tr id="headers">
+                    </tr>
+                </thead>
+                <tbody id="values">
+
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+    <script src="./assets/js/jq.js"></script>
+    <script src="./assets/js/nanobar.min.js"></script>
+    <script src="./assets/js/papaparse.js"></script>
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>

@@ -66,7 +66,7 @@ $(document).ready(function() {
                     moment(values[k]); //use momentjs to make a pretty date
 
                     s += '<td>';
-                    s += moment().format('MMMM Do YYYY, h:mm:ss a'); //display the timestamp in a more readable format
+                    s += moment().format('h:mm:ss a'); //display the timestamp in a more readable format
                     s += '</td>';
                   } else {
                     s += '<td>' + values[k] + '</td>';

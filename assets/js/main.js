@@ -1,7 +1,11 @@
 
 var userData;
 
-var nanobar;
+var nanobar = new Nanobar( {
+    bg: '#000000',
+    target: document.getElementById('progress_bar'),
+    id: 'nano'
+});
 
 var totalRequests = 0;
 
@@ -19,7 +23,6 @@ $(document).ready(function() {
             header: true,
             skipEmptyLines: true,
             complete: function(results, file) {
-                // console.log("Parse Complete", results);
                 userData = results;
                 renderPreview(results);
                 $('#send-block').show();
@@ -35,9 +38,21 @@ $(document).ready(function() {
             $('#headers').append('<th>' + header + '</th>'); //add a header for each column
         });
 
+
+        nanobar.go(5);
+
+
         var tempDate = new Date(0);
         var date = 0;
+        var currentRow = 0;
+        var totalRows = results.data.length;
+
+        console.log('totalRows', totalRows);
+
         results.data.forEach(function (row) {
+          currentRow++;
+
+          nanobar.go((currentRow / totalRows) * 100);
 
             function rowString(values) {
                 var s = '<tr>';
@@ -49,7 +64,6 @@ $(document).ready(function() {
                     // timestamp = moment(values[k]).format('MMMM Do YYYY, h:mm:ss a');
 
                     moment(values[k]); //use momentjs to make a pretty date
-                    console.log(values[k]);
 
                     s += '<td>';
                     s += moment().format('MMMM Do YYYY, h:mm:ss a'); //display the timestamp in a more readable format
@@ -65,47 +79,6 @@ $(document).ready(function() {
             $('#values').append(rowString(row));
         });
 
-        totalRequests = results.data.length;
-    }
-
-    $('#send').click(function() { sendRequests(); });
-
-
-    function sendRequests() {
-
-        $('#send').hide();
-
-        nanobar = new Nanobar( {
-            bg: '#000000',
-            target: document.getElementById('progress_bar'),
-            id: 'nano'
-        });
-        nanobar.go(5);
-
-
-        var requests = [];
-        userData.data.forEach(function (req) {
-            requests.push(post(req));
-        });
-        Promise.all(requests).then(function () {
-            $('<h2>Completed</h2>').hide().appendTo('.send').fadeIn();
-        });
-    }
-
-    function post(req) {
-        return new Promise(function(resolve, reject) {
-            /* replace setTimeout with ajax post */
-            setTimeout(function () {
-                resolve("Success");
-                tickProgress();
-            }, Math.random() * 5000);
-        });
-    }
-
-    var completedRequests = 0;
-    function tickProgress() {
-        completedRequests++;
-        nanobar.go(completedRequests / totalRequests * 100);
     }
 
 });

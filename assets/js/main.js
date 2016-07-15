@@ -61,12 +61,12 @@ $(document).ready(function() {
                 //add a column for each column in the csv
                 Object.keys(values).forEach(function (k) {
                   if (k == 'TimeStamp' || k == 'ScheduledTime') {
-                    // timestamp = moment(values[k]).format('MMMM Do YYYY, h:mm:ss a');
 
                     moment(values[k]); //use momentjs to make a pretty date
 
                     s += '<td>';
                     s += moment().format('h:mm:ss a'); //display the timestamp in a more readable format
+                    // console.log('wuddup');
                     s += '</td>';
                   } else {
                     s += '<td>' + values[k] + '</td>';

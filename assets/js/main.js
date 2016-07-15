@@ -41,14 +41,18 @@ $(document).ready(function() {
 
             function rowString(values) {
                 var s = '<tr>';
-                var timestamp = new Date (0);
+                var timestamp;
 
                 //add a column for each column in the csv
                 Object.keys(values).forEach(function (k) {
                   if (k == 'TimeStamp' || k == 'ScheduledTime') {
-                    timestamp.setUTCSeconds(values[k]);
+                    // timestamp = moment(values[k]).format('MMMM Do YYYY, h:mm:ss a');
+
+                    moment(values[k]); //use momentjs to make a pretty date
+                    console.log(values[k]);
+
                     s += '<td>';
-                    s += timestamp; //
+                    s += moment().format('MMMM Do YYYY, h:mm:ss a'); //display the timestamp in a more readable format
                     s += '</td>';
                   } else {
                     s += '<td>' + values[k] + '</td>';

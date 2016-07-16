@@ -56,16 +56,18 @@ $(document).ready(function() {
 
             function rowString(values) {
                 var s = '<tr>';
-                var timestamp;
+                var timestamp = moment();
+                var tempDate = new Date(0)
 
                 //add a column for each column in the csv
                 Object.keys(values).forEach(function (k) {
                   if (k == 'TimeStamp' || k == 'ScheduledTime') {
 
-                    moment(values[k]); //use momentjs to make a pretty date
+                    tempDate = new Date(values[k]*1000);
+                    timestamp = moment(tempDate); //use momentjs to make a pretty date
 
                     s += '<td>';
-                    s += moment().format('h:mm:ss a'); //display the timestamp in a more readable format
+                    s += timestamp.format('h:mm:ss a'); //display the timestamp in a more readable format
                     // console.log('wuddup');
                     s += '</td>';
                   } else {
